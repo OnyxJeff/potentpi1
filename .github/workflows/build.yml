@@ -1,4 +1,4 @@
-name: Skadi Build Check
+name: Odin Build Check
 
 on:
   push:
