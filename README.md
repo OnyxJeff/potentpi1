@@ -108,7 +108,7 @@ docker compose up -d
 - Instal PiHole (Automated Install method)
 
 ```bash
-bash ~pp1-odin/scripts/pihole.sh
+bash ~/pp1-odin/scripts/pihole.sh
 ```
 
 - Follow prompts on screen during installation of PiHole
