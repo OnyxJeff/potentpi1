@@ -1,4 +1,4 @@
-# pp1-Odin
+# pp1-odin
 
 ![Build Status](https://github.com/OnyxJeff/pp1-Odin/actions/workflows/build.yml/badge.svg)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)
