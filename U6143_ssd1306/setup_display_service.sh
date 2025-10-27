@@ -1,17 +1,10 @@
 #!/bin/bash
 
 # Script to configure the C display program to run on boot via systemd service.
-# Dynamically detects the user's home directory and compiles the program once.
+# Dynamically detects the repository path and compiles the program once.
 
 SERVICE_NAME="uctronics-display"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
-REPO_NAME="U6143_ssd1306" # Name of the repository directory
-# Auto-detect the repo base directory from the script’s location
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_BASE_DIR="$(dirname "$SCRIPT_DIR")"
-
-echo "Detected script directory: $SCRIPT_DIR"
-echo "Assuming repository base directory: $REPO_BASE_DIR"
 
 echo "--- UCTRONICS C Display Systemd Service Setup Script ---"
 
@@ -23,38 +16,24 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # --- Dynamic Path Configuration ---
-# 2. Determine the username and home directory of the user invoking sudo
-if [ -z "$SUDO_USER" ]; then
-  echo "Error: Cannot determine the original username (SUDO_USER environment variable not set)."
-  exit 1
-fi
-USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-if [ -z "$USER_HOME" ] || [ ! -d "$USER_HOME" ]; then
-  echo "Error: Could not find the home directory for user '$SUDO_USER'."
-   # Attempting a fallback method
-   if [ -d "/home/$SUDO_USER/pp1-odin" ]; then
-       echo "Warning: Failed to find home directory via getent, but '/home/$SUDO_USER/pp1-odin' exists. Attempting to use this path."
-       USER_HOME="/home/$SUDO_USER/pp1-odin"
-   else
-       echo "Could not automatically determine the home directory for '$SUDO_USER'."
-       exit 1
-   fi
-fi
-echo "Detected user invoking sudo as '$SUDO_USER', with home directory: $USER_HOME"
+# 2. Auto-detect the repo base directory from the script's location
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_BASE_DIR="$SCRIPT_DIR"
 
-# 3. Define paths
-C_DIR="$REPO_BASE_DIR/C"      # Directory containing C source code and Makefile
-MAKEFILE_PATH="$C_DIR/Makefile"  # Full path to the Makefile
-EXECUTABLE_PATH="$C_DIR/display" # Path to the compiled executable
+echo "Detected repository base directory (script location): $REPO_BASE_DIR"
+
+# 3. Define C program paths
+C_DIR="$REPO_BASE_DIR/C"             # Directory containing C source code and Makefile
+MAKEFILE_PATH="$C_DIR/Makefile"      # Full path to the Makefile
+EXECUTABLE_PATH="$C_DIR/display"     # Path to the compiled executable
 
 echo "Assuming C program path: $C_DIR"
 echo "Assuming Makefile path: $MAKEFILE_PATH"
-# --- Dynamic Path Configuration End ---
+# --- End Dynamic Path Configuration ---
 
 # 4. Check if the C directory and Makefile exist
 if [ ! -d "$C_DIR" ]; then
   echo "Error: C program directory not found: $C_DIR"
-  echo "Please ensure the '$REPO_NAME' repository is cloned into '$USER_HOME'."
   exit 1
 fi
 if [ ! -f "$MAKEFILE_PATH" ]; then
@@ -62,12 +41,10 @@ if [ ! -f "$MAKEFILE_PATH" ]; then
   exit 1
 fi
 
-# 5. Compile the program (as the original user for correct permissions if needed)
+# 5. Compile the program (as root since the script runs with sudo)
 echo "Compiling the C program in $C_DIR..."
-# Run make clean and make as the original user to handle potential build requirements
-# Note: If make requires root, this needs adjustment, but usually build doesn't.
-sudo -u "$SUDO_USER" make -C "$C_DIR" clean
-sudo -u "$SUDO_USER" make -C "$C_DIR"
+make -C "$C_DIR" clean
+make -C "$C_DIR"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to compile the program using 'make' in $C_DIR."
     exit 1
