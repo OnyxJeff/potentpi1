@@ -103,13 +103,16 @@ docker compose up -d
 
 ## 📦 Pi-Hole
 
-- Installing Pihole (Automated Install method)
-
 ![PiHole](images/pihole.png)
+
+- Instal PiHole (Automated Install method)
 
 ```bash
 bash ~pp1-Odin/scripts/pihole.sh
 ```
+
+- Follow prompts on screen during installation of PiHole
+
 Note: This will install the latest version of Pi-Hole.
 
 ---
