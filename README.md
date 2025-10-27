@@ -39,7 +39,7 @@ Choose Interface Options Enable i2c
 
 - Run setup_display_service.sh script
 ```bash
-cd ~/pp1-Odin/U6143_ssd1306
+cd ~/pp1-odin/U6143_ssd1306
 chmod +x setup_display_service.sh
 sudo ./setup_display_service.sh
 ```
@@ -95,7 +95,7 @@ docker compose version
 
 - Installing Dockprom (Prometheus Exporter)
 ```bash
-cd ~/pp1-Odin/dockprom
+cd ~/pp1-odin/dockprom
 docker compose up -d
 ```
 
@@ -108,7 +108,7 @@ docker compose up -d
 - Instal PiHole (Automated Install method)
 
 ```bash
-bash ~pp1-Odin/scripts/pihole.sh
+bash ~pp1-odin/scripts/pihole.sh
 ```
 
 - Follow prompts on screen during installation of PiHole
