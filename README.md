@@ -114,5 +114,14 @@ Note: This will install the latest version of Pi-Hole.
 
 ---
 
+## Acknowledgements
+
+This project uses or is inspired by the following repositories:
+
+- [U6143_ssd1306](https://github.com/UCTRONICS/U6143_ssd1306) – Provides the C display code used in the systemd service setup.
+- [Dockprom](https://github.com/stefanprodan/dockprom) – Used for Docker-based Prometheus monitoring and metrics collection.
+
+---
+
 📬 Maintained By
 Jeff M. • [@OnyxJeff](https://www.github.com/onyxjeff)
