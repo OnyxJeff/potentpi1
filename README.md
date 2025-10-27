@@ -1,10 +1,10 @@
 # pp1-odin
 
-![Build Status](https://github.com/OnyxJeff/pp1-Odin/actions/workflows/build.yml/badge.svg)
+![Build Status](https://github.com/OnyxJeff/pp1-odin/actions/workflows/build.yml/badge.svg)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/pp1-Odin)
-![Issues](https://img.shields.io/github/issues/OnyxJeff/pp1-Odin)
+![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/pp1-odin)
+![Issues](https://img.shields.io/github/issues/OnyxJeff/pp1-odin)
 
 **Odin** is the DNS deity and VPN sentinel of my homelab, powered by a Raspberry Pi 4.
 
