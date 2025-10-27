@@ -1,0 +1,118 @@
+# pp1-Odin
+
+![Build Status](https://github.com/OnyxJeff/pp4-Skadi/actions/workflows/build.yml/badge.svg)
+![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/pp4-Skadi)
+![Issues](https://img.shields.io/github/issues/OnyxJeff/pp4-Skadi)
+
+**Odin** is the DNS deity and VPN sentinel of my homelab, powered by a Raspberry Pi 4.
+
+## 📁 Repo Structure
+
+```text
+pp1-Odin/
+├── .github/workflows/      # CI for YAML validation
+├── backup_logs/            # Oldest logs from update script
+├── dockprom/               # Docker container(s) for Prometheus Node Exporter for RPi
+├── images/                 # Images for README files
+├── logs/                   # Most recent update script logs
+├── scripts/                # Auto-Updater script for RPi (can be associated with cronjob)
+├── U6143_ssd1306/          # Python, C code, and script for UCTronics display screen
+└── README.md               # You're reading it!
+```
+
+---
+
+## 🧰 Services
+- **Pi-hole**: Blocks ads, trackers, and telemetry across the network.
+
+---
+
+## 🖥️ Installing U6143_ssd1306 Display
+
+- Preparation
+```bash
+sudo raspi-config
+```
+Choose Interface Options Enable i2c
+
+- Run setup_display_service.sh script
+```bash
+cd ~/pp1-Odin/U6143_ssd1306
+chmod +x setup_display_service.sh
+sudo ./setup_display_service.sh
+```
+
+- Custom display temperature type
+  - Open the U6143_ssd1306/C/ssd1306_i2c.h file. You can modify the value of the TEMPERATURE_TYPE variable to change the type of temperature displayed. (The default is Fahrenheit)
+  ![Select Temperature](images/select_temperature.jpg)
+
+- Custom display IPADDRESS_TYPE type
+  - Open the U6143_ssd1306/C/ssd1306_i2c.h file. You can modify the value of the IPADDRESS_TYPE variable to change the type of IP displayed. (The default is ETH0)
+  ![Select IP](images/select_ip.jpg)
+
+- Custom display information
+  - Open the U6143_ssd1306/C/ssd1306_i2c.h file. You can modify the value of the IP_SWITCH variable to determine whether to display the IP address or custom information. (The custom IP address is displayed by default)
+  ![Custom Display](images/custom_display.jpg)
+
+---
+
+## 📦 Installing Docker Compose
+
+- Update and Upgrade the System:
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+- Install Docker
+```bash
+cd
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+- Add User to Docker Group
+```bash
+sudo usermod -aG docker $USER
+```
+
+  - After running this command you will need to log out and log back in (or I recommend just rebooting) for the changes to take effect.
+
+- Install Docker Compose:
+```bash
+sudo apt install docker-compose-plugin
+```
+
+- Verify Installation:
+```bash
+docker run hello-world
+docker compose version
+```
+
+### 📦 Installing your first container(s)
+
+- Installing Dockprom (Prometheus Exporter)
+```bash
+cd ~/pp1-Odin/dockprom
+docker compose up -d
+```
+
+---
+
+## 📦 Pi-Hole
+
+- Installing Pihole (Automated Install method)
+
+![PiHole](images/pihole.png)
+
+```bash
+bash ~pp1-Odin/scripts/pihole.sh
+```
+Note: This will install the latest version of Pi-Hole.
+
+---
+
+📬 Maintained By
+Jeff M. • [@OnyxJeff](https://www.github.com/onyxjeff)
