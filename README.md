@@ -115,6 +115,8 @@ bash ~/pp1-odin/scripts/pihole.sh
 
 Note: This will install the latest version of Pi-Hole.
 
+- Make sure to change your DNS server in your router or PC to the IP address of Pi-Hole to utilize it.
+
 ---
 
 ## Acknowledgements
