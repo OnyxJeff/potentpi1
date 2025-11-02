@@ -34,15 +34,15 @@ pp1-Odin/
 - Preparation
 
   - Install GIT (app used to download this repo onto your device)
-```bash
-sudo apt install git -y
-```
+  ```bash
+  sudo apt install git -y
+  ```
 
   - Download repo
-```bash
-cd
-git clone https://github.com/OnyxJeff/pp1-odin.git
-```
+  ```bash
+  cd
+  git clone https://github.com/OnyxJeff/pp1-odin.git
+  ```
 
 ```bash
 sudo raspi-config
