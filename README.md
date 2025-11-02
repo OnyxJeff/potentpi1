@@ -32,6 +32,18 @@ pp1-Odin/
 ## 🖥️ Installing U6143_ssd1306 Display
 
 - Preparation
+
+  - Install GIT (app used to download this repo onto your device)
+```bash
+sudo apt install git -y
+```
+
+  - Download repo
+```bash
+cd
+git clone https://github.com/OnyxJeff/pp1-odin.git
+```
+
 ```bash
 sudo raspi-config
 ```
