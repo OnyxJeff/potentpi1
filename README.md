@@ -97,29 +97,6 @@ sudo crontab -e
 
 ## 📦 Installing Docker Compose
 
-- Update and Upgrade the System via script:
-```bash
-cd ~/pp1-odin/scripts
-chmod +x apt-get-autoupdater.sh
-sudo ./apt-get-autoupdater.sh
-```
-
-- Start CronJob (optional but recommended if doing headless/always on installation)
-```bash
-sudo crontab -e
-```
-
-  - add the following to the bottom of the document:
-  ```bash
-  # OS-Auto-Updater
-    00 01 * * 0 bash $HOME/pp1-odin/scripts/apt-get-autoupdater.sh
-      # execute automatic update script and log every sunday at 01:00 am
-    50 00 1 * * /bin/bash -c 'cp $HOME/pp1-odin/logs/apt-get-autoupdater.log $HOME/pp1-odin/backup_logs/apt-get-autoupdater-$(date +\%Y\%m\%d).log'
-      # saves monthly version of "apt-get-autoupdater.log" on the 1st of every month at 00:50 am
-    51 00 1 * * rm -f $HOME/pp1-odin/logs/apt-get-autoupdater.log
-      # deletes old weekly log on the 1st of every month at 00:51 am
-  ```
-
 - Install Docker
 ```bash
 cd
