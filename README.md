@@ -44,10 +44,11 @@ pp1-Odin/
   git clone https://github.com/OnyxJeff/pp1-odin.git
   ```
 
-```bash
-sudo raspi-config
-```
-Choose Interface Options Enable i2c
+  - Launch Raspi-Config
+  ```bash
+  sudo raspi-config
+  ```
+  Choose Interface Options Enable i2c
 
 - Run setup_display_service.sh script
 ```bash
@@ -67,6 +68,9 @@ sudo ./setup_display_service.sh
 - Custom display information
   - Open the U6143_ssd1306/C/ssd1306_i2c.h file. You can modify the value of the IP_SWITCH variable to determine whether to display the IP address or custom information. (The custom IP address is displayed by default)
   ![Custom Display](images/custom_display.jpg)
+
+> [!Note]
+> I did rewrite the initial install script to be more repo friendly.
 
 ---
 
