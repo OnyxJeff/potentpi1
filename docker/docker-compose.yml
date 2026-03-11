@@ -100,9 +100,11 @@ services:
     container_name: pihole-sqlite-exporter
     image: merlijntishauser/pihole-sqlite-exporter:latest
     restart: unless-stopped
-    user: "0:0"
+    user: "${PUID:-0}:${PGID:-0}"
     environment:
-      - TZ=America/New_York
+      EXPORTER_TZ: "America/New_York"
+      FTL_DB_PATH: "/etc/pihole/pihole-FTL.db"
+      GRAVITY_DB_PATH: "/etc/pihole/gravity.db"
     volumes:
       - /etc/pihole:/etc/pihole:ro
       - /var/log/pihole:/var/log/pihole:ro
