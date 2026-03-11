@@ -129,10 +129,11 @@ docker compose version
 
 ### 📝 Installing your first container(s)
 
-- Installing Dockprom (Prometheus Exporter)
+- Installing Container Stack (via script)
 ```bash
-cd ~/pp1-odin/dockprom
-docker compose up -d
+cd ~/pp0-forseti/scripts
+chmod +x docker-up-all.sh
+./docker-up-all.sh
 ```
 
 ---
@@ -144,7 +145,9 @@ docker compose up -d
 - Instal PiHole (Automated Install method)
 
 ```bash
-bash ~/pp1-odin/scripts/pihole.sh
+cd ~/pp1-odin/scripts
+chmod +x pihole.sh
+./pihole.sh
 ```
 
 - Follow prompts on screen during installation of PiHole
@@ -160,7 +163,7 @@ Note: This will install the latest version of Pi-Hole.
 This project uses or is inspired by the following repositories:
 
 - [U6143_ssd1306](https://github.com/UCTRONICS/U6143_ssd1306) – Provides the C display code used in the systemd service setup.
-- [Dockprom](https://github.com/stefanprodan/dockprom) – Used for Docker-based Prometheus monitoring and metrics collection.
+- [Dockprom](https://github.com/stefanprodan/dockprom) – Used as inspiration for Docker-based Prometheus monitoring and metrics collection.
 - [Pi-Hole](https://pi-hole.net/) – Provides PiHole instance for a custom DNS sinkhole that protects your devices from unwanted content, without installing any client-side software.
 
 ---
