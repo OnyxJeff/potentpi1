@@ -34,6 +34,10 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
+  - job_name: 'pihole'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['pihole-sqlite-exporter:9617']
 
 alerting:
   alertmanagers:

@@ -85,25 +85,6 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  grafana:
-    image: grafana/grafana:10.4.2
-    container_name: grafana
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-    environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
-    restart: unless-stopped
-    expose:
-      - 3000
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
-
   pushgateway:
     image: prom/pushgateway:v1.8.0
     container_name: pushgateway
@@ -115,22 +96,16 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  pihole-exporter:
-    container_name: pihole-exporter
-    image: ekofr/pihole-exporter:latest
-    env_file:
-      - pihole-exporter.env
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "5k"
-        max-file: "5"
-    healthcheck:
-      test: ["CMD", "wget", "--tries=1", "--spider", "http://localhost:9617/metrics"]
-      interval: 300s
-      retries: 5
-      timeout: 10s
-    restart: always
+  pihole-sqlite-exporter:
+    container_name: pihole-sqlite-exporter
+    image: merlijntishauser/pihole-sqlite-exporter:latest
+    restart: unless-stopped
+    user: "0:0"
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /etc/pihole:/etc/pihole:ro
+      - /var/log/pihole:/var/log/pihole:ro
     expose:
       - 9617
     networks:
