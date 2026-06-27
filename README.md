@@ -131,7 +131,7 @@ docker compose version
 
 - Installing Container Stack (via script)
 ```bash
-cd ~/pp0-forseti/scripts
+cd ~/pp1-odin/scripts
 chmod +x docker-up-all.sh
 ./docker-up-all.sh
 ```
