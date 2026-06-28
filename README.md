@@ -1,17 +1,17 @@
-# pp1-odin
+# potentpi1
 
-![Build Status](https://github.com/OnyxJeff/pp1-odin/actions/workflows/build.yml/badge.svg)
+![Build Status](https://github.com/OnyxJeff/potentpi1/actions/workflows/build.yml/badge.svg)
 ![Maintenance](https://img.shields.io/maintenance/yes/2026.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/pp1-odin)
-![Issues](https://img.shields.io/github/issues/OnyxJeff/pp1-odin)
+![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/potentpi1)
+![Issues](https://img.shields.io/github/issues/OnyxJeff/potentpi1)
 
 **Odin** is the DNS deity and VPN sentinel of my homelab, powered by a Raspberry Pi 4.
 
 ## 📁 Repo Structure
 
 ```text
-pp1-Odin/
+potentpi1/
 ├── .github/workflows/      # CI for YAML validation
 ├── backup_logs/            # Oldest logs from update script
 ├── dockprom/               # Docker container(s) for Prometheus Node Exporter for RPi
@@ -39,7 +39,7 @@ pp1-Odin/
   - Download repo
   ```bash
   cd
-  git clone https://github.com/OnyxJeff/pp1-odin.git
+  git clone https://github.com/OnyxJeff/potentpi1.git
   ```
 ---
 
@@ -53,7 +53,7 @@ Choose Interface Options Enable i2c
 
 - Run setup_display_service.sh script
 ```bash
-cd ~/pp1-odin/U6143_ssd1306
+cd ~/potentpi1/U6143_ssd1306
 chmod +x setup_display_service.sh
 sudo ./setup_display_service.sh
 ```
@@ -77,9 +77,15 @@ sudo ./setup_display_service.sh
 
 ## ⚠️ Updating the OS
 
+- Make log folders
+```bash
+mkdir ~/potentpi1/logs
+mkdir ~/potentpi1/backup_logs
+```
+
 - Update and Upgrade the System via script:
 ```bash
-cd ~/pp1-odin/scripts
+cd ~/potentpi1/scripts
 chmod +x apt-get-autoupdater.sh
 sudo ./apt-get-autoupdater.sh
 ```
@@ -92,13 +98,15 @@ sudo crontab -e
   - add the following to the bottom of the document:
   ```bash
   # OS-Auto-Updater
-    00 01 * * 0 bash $HOME/pp1-odin/scripts/apt-get-autoupdater.sh
+    00 01 * * 0 bash $HOME/potentpi1/scripts/apt-get-autoupdater.sh
       # execute automatic update script and log every sunday at 01:00 am
-    50 00 1 * * /bin/bash -c 'cp $HOME/pp1-odin/logs/apt-get-autoupdater.log $HOME/pp1-odin/backup_logs/apt-get-autoupdater-$(date +\%Y\%m\%d).log'
+    50 00 1 * * /bin/bash -c 'cp $HOME/potentpi1/logs/apt-get-autoupdater.log $HOME/potentpi1/backup_logs/apt-get-autoupdater-$(date +\%Y\%m\%d).log'
       # saves monthly version of "apt-get-autoupdater.log" on the 1st of every month at 00:50 am
-    51 00 1 * * rm -f $HOME/pp1-odin/logs/apt-get-autoupdater.log
+    51 00 1 * * rm -f $HOME/potentpi1/logs/apt-get-autoupdater.log
       # deletes old weekly log on the 1st of every month at 00:51 am
   ```
+
+---
 
 ## 📦 Installing Docker Compose
 
@@ -132,7 +140,7 @@ docker compose version
 
 - Installing Container Stack (via script)
 ```bash
-cd ~/pp1-odin/scripts
+cd ~/potentpi1/scripts
 chmod +x docker-up-all.sh
 ./docker-up-all.sh
 ```
@@ -146,7 +154,7 @@ chmod +x docker-up-all.sh
 - Instal PiHole (Automated Install method)
 
 ```bash
-cd ~/pp1-odin/scripts
+cd ~/potentpi1/scripts
 chmod +x pihole.sh
 ./pihole.sh
 ```
